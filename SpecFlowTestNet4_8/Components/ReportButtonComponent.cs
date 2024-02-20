@@ -1,26 +1,41 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
+﻿using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium;
 using SalesbookTest.Contracts;
 using SalesbookTest.Drivers;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SalesbookTest.Components
 {
-    public class ButtonComponent : IBaseComponent
+    public class ReportButtonComponent : IBaseComponent
     {
-
         private readonly By _locator;
         private IWebElement _parent;
         Actions action = new Actions(BrcWebdriver.GetInstance());
 
-        public ButtonComponent(By locator)
+        public ReportButtonComponent(By locator)
         {
             _locator = locator;
         }
 
-        public ButtonComponent(string windowName, string buttonName)
+        public ReportButtonComponent( string buttonName, string detail)
         {
-            _locator = By.XPath($"//div[starts-with(@id,'{windowName}')]//*[text()='{buttonName}']");
+            if (detail == "upper button")
+            {
+                _locator = By.XPath($"//*[text()='{buttonName}'][1]");
+            }
+            if (detail == "lower button")
+            {
+                _locator = By.XPath($"//*[text()='{buttonName}'][2]");
+            }
+            if (detail == "in report list")
+            {
+                _locator = By.XPath($"(//*[text()='{buttonName}'])[2]");
+
+            }
         }
 
 
@@ -41,16 +56,6 @@ namespace SalesbookTest.Components
         {
             return BrcWebdriver.GetInstance().FindElement(_locator).Displayed;
         }
-
-        //public IWebElement GetInstance()
-        //{
-        //    return BrcWebdriver.GetInstance().FindElement(_locator);
-        //}
-
-        //public  IWebElement GetElement()
-        //{
-        //    return _parent.FindElement(_locator);
-        //}
 
         public IWebElement GetInstance()
         {

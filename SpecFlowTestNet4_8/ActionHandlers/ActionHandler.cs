@@ -23,36 +23,42 @@ namespace SalesbookTest.ActionHandlers
         //{
         //    this.componentAction = actionStrategy;
         //}
-        public void Handle(string action,  string elementName, string elementType, string value, string windowId)
+        public void Handle(string action,  string elementName, string elementType, string detail, string windowId)
         {
             var webDriver = BrcWebdriver.GetInstance();
             var webDriverAction = new Actions(webDriver);
 
-            var windowComponent = webDriver.FindElement(By.XPath($"//div[starts-with(@id,'{windowId}')]"));
+            //var windowComponent = webDriver.FindElement(By.XPath($"//div[starts-with(@id,'{windowId}')]"));
             IBaseComponent? component = null;
          
             switch (elementType)
             {
                 case "Button":
-                    component = new ButtonComponent(windowComponent, elementName);
+                    component = new ButtonComponent(windowId, elementName);
                     break;
                 case "Input":
-                    component = new InputComponent(windowComponent, elementName);
+                    component = new InputComponent(windowId, elementName);
                     break;
                 case "VATAnalysis":
-                    component = new VATAnalysisInputComponent(windowComponent, elementName);
+                    component = new VATAnalysisInputComponent(windowId, elementName);
                         break ;
                 case "AnalysisCategories":
-                    component = new AnalysisCategoriesInputComponent(windowComponent, elementName);
+                    component = new AnalysisCategoriesInputComponent(windowId, elementName);
                     break;
                 case "DataGrid":
-                    component = new DataGridComponent(windowComponent, elementName);
+                    component = new DataGridComponent( elementName);
                     break;
                 case "Message":
                     component = new ToolTipComponent( elementName);
                     break;
                 case "Radio":
                     component = new RadioComponent(windowId,elementName);
+                    break;
+                case "Url":
+                    component = new UrlComponent(elementName);
+                    break;
+                case "ReportButton":
+                    component = new ReportButtonComponent( elementName, detail);
                     break;
             }
             if (component == null) { return; }
@@ -66,7 +72,7 @@ namespace SalesbookTest.ActionHandlers
                 case "Enters":
                     webDriverAction.Click(component.GetElement()).Build().Perform();
                     component.GetElement().Clear();
-                    component.GetElement().SendKeys(value);
+                    component.GetElement().SendKeys(detail);
                     break;
                 case "Double clicks":
                     webDriverAction.DoubleClick(component.GetElement()).Build().Perform();
@@ -93,6 +99,22 @@ namespace SalesbookTest.ActionHandlers
                     Assert.AreEqual(false, isButtonDisplayed);
 
                     break;
+                case "Waits":
+                    if (component is UrlComponent waitUrlComponent)
+                    {
+                        waitUrlComponent.WaitForUrl(elementName);
+
+                    }
+
+                    break;
+                case "Verifies Content":
+                    if (component is UrlComponent verifyUrlComponent)
+                    {
+                       bool isContentDisplayed = verifyUrlComponent.VerifyElementTextPresent(elementName);
+                        Assert.AreEqual(true, isContentDisplayed);
+                    }
+                    break;
+
             }
 
 

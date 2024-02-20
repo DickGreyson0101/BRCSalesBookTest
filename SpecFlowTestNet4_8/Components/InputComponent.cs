@@ -20,10 +20,9 @@ namespace SalesbookTest.Components
             _locator = locator;
             
         }
-        public InputComponent(IWebElement parent, string inputElementName)
+        public InputComponent(string windowName, string inputElementName)
         {
-            _parent = parent;
-            _locator = By.XPath($".//*[text()='{inputElementName}']/ancestor::td/following-sibling::td//input[1]");
+            _locator = By.XPath($"//div[starts-with(@id,'{windowName}')]//*[text()='{inputElementName}']/ancestor::td/following-sibling::td//input[1]");
             //_locator = By.XPath($"(.//*[text()='{inputElementName}']/following::input[{inputIndex}])[1]");
 
         }

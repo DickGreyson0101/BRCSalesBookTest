@@ -706,14 +706,14 @@ testRunner.Then("Verify the following actions:", ((string)(null)), table10, "The
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Verify if Salesbook is closed when clicking \"close\"")]
-        public virtual void VerifyIfSalesbookIsClosedWhenClickingClose()
+        [NUnit.Framework.DescriptionAttribute("Verify if the report appeared with appropriate content")]
+        public virtual void VerifyIfTheReportAppearedWithAppropriateContent()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify if Salesbook is closed when clicking \"close\"", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 118
-  this.ScenarioInitialize(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verify if the report appeared with appropriate content", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 119
+this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
             bool isFeatureIgnored = default(bool);
@@ -732,8 +732,8 @@ testRunner.Then("Verify the following actions:", ((string)(null)), table10, "The
             else
             {
                 this.ScenarioStart();
-#line 119
-    testRunner.Given("The user is in \"salesInvoicing\" window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 120
+testRunner.Given("The user is in \"salesInvoicing\" window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                             "Action",
@@ -743,12 +743,36 @@ testRunner.Then("Verify the following actions:", ((string)(null)), table10, "The
                             "Window"});
                 table11.AddRow(new string[] {
                             "Clicks",
-                            "Close",
+                            "Reports",
+                            "ReportButton",
+                            "upper button",
+                            ""});
+                table11.AddRow(new string[] {
+                            "Clicks",
+                            "Cash Book",
+                            "ReportButton",
+                            "in report list",
+                            ""});
+                table11.AddRow(new string[] {
+                            "Clicks",
+                            "Cash Receipts Listing",
                             "Button",
                             "",
-                            "salesInvoicing"});
-#line 120
-    testRunner.When("The user performs the following actions:", ((string)(null)), table11, "When ");
+                            ""});
+                table11.AddRow(new string[] {
+                            "Clicks",
+                            "Display",
+                            "Button",
+                            "",
+                            ""});
+                table11.AddRow(new string[] {
+                            "Waits",
+                            "https://brc-uat.azurewebsites.net/report/ReportViewer.aspx",
+                            "Url",
+                            "",
+                            ""});
+#line 121
+testRunner.When("The user performs the following actions:", ((string)(null)), table11, "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "Action",
@@ -757,12 +781,12 @@ testRunner.Then("Verify the following actions:", ((string)(null)), table10, "The
                             "Detail",
                             "Window"});
                 table12.AddRow(new string[] {
-                            "Checks Display",
-                            "container-1331",
-                            "elementById",
+                            "Verifies Content",
+                            "CASH RECEIPTS ANALYSIS DETAILS",
+                            "ToolTip",
                             "",
                             ""});
-#line 124
+#line 128
 testRunner.Then("Verify the following actions:", ((string)(null)), table12, "Then ");
 #line hidden
             }

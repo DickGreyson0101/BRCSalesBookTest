@@ -19,16 +19,23 @@ namespace SalesbookTest.Components
             _locator = locator;
             
         }
-        public AnalysisCategoriesInputComponent(IWebElement parent,  string inputIndex)
+        public AnalysisCategoriesInputComponent(string windowName,  string inputIndex)
         {
-            _parent = parent;
             //_locator = By.XPath($"(.//*[text()='{inputElementName}']/following::input[{inputIndex}])[1]");
-            _locator = By.XPath($"(.//*[contains(text(), 'Analysis Categories')]/following::input[starts-with(@id, 'scalableNumber-')])[{inputIndex}]");
+            _locator = By.XPath($"(//div[starts-with(@id,'{windowName}')]//*[contains(text(), 'Analysis Categories')]/following::input[starts-with(@id, 'scalableNumber-')])[{inputIndex}]");
         }
 
+        //public IWebElement GetElement()
+        //{
+        //    return _parent.FindElement(_locator);
+        //}
+        public IWebElement GetInstance()
+        {
+            return BrcWebdriver.GetInstance().FindElement(_locator);
+        }
         public IWebElement GetElement()
         {
-            return _parent.FindElement(_locator);
+            return GetInstance().FindElement(_locator);
         }
     }
 }

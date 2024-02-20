@@ -22,9 +22,9 @@ namespace SalesbookTest.Components
             _locator = locator;
             
         }
-        public DataGridComponent(IWebElement parent, string element)
+        public DataGridComponent(string element)
         {
-            _parent = parent;
+            //_parent = parent;
            
             _locator = By.XPath($"(//div[starts-with(@id, 'gridpanel')]//div[starts-with(@id,'gridview')]//table[starts-with(@class, 'x-grid-table')])[1]//tr[contains(@class, 'x-grid-row')][{element}]");
             //if(_previousRowCount < 0)
@@ -52,9 +52,13 @@ namespace SalesbookTest.Components
             }
         }
 
-        public  IWebElement GetElement()
+        public IWebElement GetInstance()
         {
-            return _parent.FindElement(_locator);
+            return BrcWebdriver.GetInstance().FindElement(_locator);
+        }
+        public IWebElement GetElement()
+        {
+            return GetInstance().FindElement(_locator);
         }
     }
 }

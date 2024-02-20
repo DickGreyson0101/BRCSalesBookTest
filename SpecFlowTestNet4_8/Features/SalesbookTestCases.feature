@@ -119,10 +119,13 @@ Rule: Check visible
 Scenario Outline:  Verify if the report appeared with appropriate content 
 Given The user is in "salesInvoicing" window
 When The user performs the following actions:
-| Action | Element                                                    | Type | Detail | Window |
-| Waits  | https://brc-uat.azurewebsites.net/report/ReportViewer.aspx | Url  |        |        |
+| Action | Element                                                    | Type         | Detail         | Window |
+| Clicks | Reports                                                    | ReportButton | upper button   |        |
+| Clicks | Cash Book                                                  | ReportButton | in report list |        |
+| Clicks | Cash Receipts Listing                                      | Button       |                |        |
+| Clicks | Display                                                    | Button       |                |        |
+| Waits  | https://brc-uat.azurewebsites.net/report/ReportViewer.aspx | Url          |                |        |
 Then Verify the following actions:
-    | Action         | Element                                                    | Type    | Detail | Window |
-    | Checks Display | https://brc-uat.azurewebsites.net/report/ReportViewer.aspx | Url     |        |        |
-    | Checks Display | CASH BOOK SUMMARY REPORT                                   | ToolTip |        |        |
+    | Action           | Element                        | Type    | Detail | Window |
+    | Verifies Content | CASH RECEIPTS ANALYSIS DETAILS | ToolTip |        |        |
 
