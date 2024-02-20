@@ -97,21 +97,32 @@ Rule: Change Sales Book Entries
   Scenario Outline: Verify if a Sales Book Entries record has been change with valid data 
     Given The user is in "salesInvoicing" window
     When The user performs the following actions:
-      | Action        | Element  | Type                    | Detail    | Window             |
-      | Clicks        | 1        | DataGrid                |           | salesInvoicingBook |
-      | Clicks        | Change   | Button                  |           | salesInvoicing     |
-      | Enters        | Account: | Input                   | CUS1      | salesBookEntry     |
-      | Enters        | Name:    | Input                   | Linh      | salesBookEntry     |
-      | Enters        | Total:   | Input                   | 300       | salesBookEntry     |
-      | Double clicks | 2        | VATAnalysisInput        |           | salesBookEntry     |
-      | Enters        | 1        | AnalysisCategories | 10        | salesBookEntry     |
-      | Enters        | 2        | AnalysisCategories | 10        | salesBookEntry     |
-      | Enters        | 3        | AnalysisCategories | 20        | salesBookEntry     |
-      | Double clicks | 4        | AnalysisCategories |           | salesBookEntry     |
-      | Clicks        | Save     | Button                  |           | salesBookEntry     |
+      | Action        | Element  | Type               | Detail | Window             |
+      | Clicks        | 1        | DataGrid           |        | salesInvoicingBook |
+      | Clicks        | Change   | Button             |        | salesInvoicing     |
+      | Enters        | Account: | Input              | CUS1   | salesBookEntry     |
+      | Enters        | Name:    | Input              | Linh   | salesBookEntry     |
+      | Enters        | Total:   | Input              | 300    | salesBookEntry     |
+      | Double clicks | 2        | VATAnalysisInput   |        | salesBookEntry     |
+      | Enters        | 1        | AnalysisCategories | 10     | salesBookEntry     |
+      | Enters        | 2        | AnalysisCategories | 10     | salesBookEntry     |
+      | Enters        | 3        | AnalysisCategories | 20     | salesBookEntry     |
+      | Double clicks | 4        | AnalysisCategories |        | salesBookEntry     |
+      | Clicks        | Save     | Button             |        | salesBookEntry     |
 Then Verify the following actions:
     | Action         | Element | Type   | Detail | Window         |
     | Checks Display | Save    | Button |        | salesBookEntry |
 
 
+
+Rule: Check visible 
+Scenario Outline:  Verify if the report appeared with appropriate content 
+Given The user is in "salesInvoicing" window
+When The user performs the following actions:
+| Action | Element                                                    | Type | Detail | Window |
+| Waits  | https://brc-uat.azurewebsites.net/report/ReportViewer.aspx | Url  |        |        |
+Then Verify the following actions:
+    | Action         | Element                                                    | Type    | Detail | Window |
+    | Checks Display | https://brc-uat.azurewebsites.net/report/ReportViewer.aspx | Url     |        |        |
+    | Checks Display | CASH BOOK SUMMARY REPORT                                   | ToolTip |        |        |
 
